@@ -17,6 +17,6 @@ class ReservationContract < Dry::Validation::Contract
     end
 
     rule(:created_at, :id) do
-        key.failure('Field is required') if ((!values[:created_at]) && values[:id].nil?)
+        key.failure('Field is required') if (!values[:created_at])
     end
 end
