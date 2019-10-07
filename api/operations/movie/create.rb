@@ -10,7 +10,6 @@ module OperationsMovie
     	DENY_PARAMS  = %i[id].freeze
 
 		def validate(movie)
-			p ALLOW_PARAMS
 			contract = MovieContract.new
 			movie = movie.merge(name: movie[:name].upcase)
 			result = contract.call(movie)

@@ -29,7 +29,6 @@ module OperationsReservation
 
 		def validate(reservation)
 			contract = ReservationContract.new
-			reservation = reservation.merge(reservation: reservation[:reservation].merge(created_at: Time.now)) 
 			result = contract.call(reservation[:reservation])
 			result.success? ? Success({id: reservation[:id], reservation: result.to_h}) : Failure(result.errors.to_h)
 		end

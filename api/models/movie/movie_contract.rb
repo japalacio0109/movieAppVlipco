@@ -8,27 +8,17 @@ class MovieContract < DynamicContracts
         optional(:until_at).value(:date)
     end
 
-    rule(:name, :id) do
-        key.failure('Field is required') if ((!values[:name] || values[:name].nil?) && values[:id].nil?)
-    end
 
     rule(:description, :id) do
-        key.failure('Field is required') if ((!values[:description] || values[:description].nil?) && values[:id].nil?)
         key.failure('Must have at least 10 characters') if (values[:description] && values[:description].length < 10)
     end
 
     rule(:image_url, :id) do
-        key.failure('Field is required') if ((!values[:image_url] || values[:image_url].nil?) && values[:id].nil?)
         key.failure('Must be a right URL') if values[:image_url] && !(valid_url?(values[:image_url]))
     end
 
     rule(:since_at, :id) do
-        key.failure('Field is required') if ((!values[:since_at] || values[:since_at].nil?) && values[:id].nil?)
         key.failure('Must be in the future') if (values[:since_at] && values[:since_at] < Date.today)
-    end
-
-    rule(:until_at, :id) do
-        key.failure('Field is required') if ((!values[:until_at] || values[:until_at].nil?) && values[:id].nil?)
     end
 
     rule(:until_at, :since_at) do
